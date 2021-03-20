@@ -1,0 +1,17 @@
+S0 ::= Restaurante=’NOMBRE DEL RESTAURANTE’
+        |‘NOMBRE DE SECCIÓN’:
+        |[IDENTIFICADOR;’NOMBRE’;PRECIO;’DESCRIPCIÓN’]
+
+IDENTIFICADOR ::= LETRA
+
+PRECIO ::= Numero
+            | Numero.
+            | Numero.Numero
+
+ESTRUCTURA
+
+[
+    Nombre = 'Restaurante F'
+    Lista_ID_Seccion: []
+    Lista_Seccion: [{ID,IDENTIFICADOR,NOMBRE,PRECIO,DESCRIPCION}]
+]

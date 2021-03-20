@@ -1,0 +1,126 @@
+@charset "UTF-8";
+@import url('https:/fonts.googleapis.com/css?family=Ubuntu:400,500,700');
+
+body{
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #222;
+    font-family: 'Ubuntu',sans-serif;
+}
+
+.conten{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    display: flex;    
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.hea{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    text-align: center;
+}
+
+.container{
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    grid-gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.container .box
+{
+    position: relative;
+    background: #fff;
+    padding: 20px 40px 40 px;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.container .box:nth-child(1)
+{
+    background: linear-gradient(45deg,#036eb7,#64eaff);
+}
+.container .box:nth-child(2)
+{
+    background: linear-gradient(45deg,#086d35,#00ff72);
+}
+.container .box:nth-child(3)
+{
+    background: linear-gradient(45deg,#f05a4f,#f4c030);
+}
+.container .box:nth-child(4)
+{
+    background: linear-gradient(45deg,#E91E63,#ed55ff);
+}
+
+
+.container .box:nth-child(5)
+{
+    background: linear-gradient(45deg,#036eb7,#64eaff);
+}
+.container .box:nth-child(6)
+{
+    background: linear-gradient(45deg,#086d35,#00ff72);
+}
+.container .box:nth-child(7)
+{
+    background: linear-gradient(45deg,#f05a4f,#f4c030);
+}
+.container .box:nth-child(8)
+{
+    background: linear-gradient(45deg,#E91E63,#ed55ff);
+}
+
+
+
+.container .box h2{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-size: 100px;
+    color: #fff;
+    z-index: 1;
+    opacity: 0.4;
+}
+
+.container .box h3{
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.container .box p{
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-size: 18px;
+}
+
+div#header{
+    width: 100%;
+    height: auto;
+    background: #fff;
+}
+
+h1{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    color:#148F77;
+    z-index: 1;
+}

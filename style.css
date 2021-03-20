@@ -1,0 +1,108 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+/* ------------------- Propiedades Fondo ------------------- */
+
+body{
+    margin:0;
+    background-image: url(Imagenes/Restaurante3.jpg);
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center ;
+    background-attachment: fixed;
+}
+
+body:before {
+    content: "";
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(45deg,#036eb7,#64eaff);
+    opacity: 0.4;
+    z-index: -1;
+}
+
+/* ------------------- Propiedades DIV ------------------- */
+
+.central {
+    width: 400px;
+    height: auto;
+    background: linear-gradient(45deg,#086d35,#00ff72);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+}
+
+.central h3{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    text-align: center;
+    color: #2874A6;
+    z-index: 1;
+}
+
+.central p{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    text-align: left;
+    color:#2471A3;
+    z-index: 1;
+}
+
+/* ------------------- Propiedades De la Tabla ------------------- */
+
+.container {
+    text-align: left;
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
+    display: table;
+    padding: 0 0 8em 0;
+}
+
+.container th h1 {
+    font-weight: bold;
+    font-size: 1em;
+    text-align: left;
+    color: #fff;
+}
+
+.container td {
+    font-weight: normal;
+    font-size: 1em;
+    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+    -moz-box-shadow: 0 2px 2px -2px #0E1119;
+    box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container td, .container th {
+    padding-bottom: 1%;
+    padding-top: 1%;
+    padding-left: 1%;
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+    background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+    background-color: #2C3446;
+}
+
+.container th {
+    background-color: #1F2739;
+}
+
+.container td:first-child { color: #FB667A; }
