@@ -7,7 +7,7 @@ def reporte_Tokens(base):
         html.write('        <link rel="stylesheet" type="text/css" href="estilo_TK.css">')
         html.write('    </head>')
         html.write('    <body >')
-        html.write('        <h1><span class="blue"></span>Reporte<span class="blue"></span> <span class="yellow"> Tokens</pan></h1>')
+        html.write('        <h1><span class="blue"></span>Reporte<span class="blue"></span> <span class="yellow"> Tokens</span></h1>')
         html.write('        <h2> Analisis <a href="http://pablogarciafernandez.com" target="_blank">Lexico</a></h2>')
         html.write('        <table class="container">')
         html.write('            <thead>')
