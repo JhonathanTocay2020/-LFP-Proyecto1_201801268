@@ -1,4 +1,5 @@
-
+import Generar_Token_Menu
+import os
 
 def analizador(cadena, lexema, lexema_error,lexema_scan):
     lexema.clear()
@@ -115,6 +116,9 @@ def analizador(cadena, lexema, lexema_error,lexema_scan):
                 cad2 = cad2 + cadena[i]
 
         i += 1
+
+    Generar_Token_Menu.reporte_Tokens(lexema)
+    os.system('Reporte_Tokens_Aceptados.html')
     # ----------------------------------------------------------------------------------------
     # ----------------------------------------------------------------------------------------
     # ------------------------------------- imprimir -----------------------------------------

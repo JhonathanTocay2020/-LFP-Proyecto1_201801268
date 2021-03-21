@@ -1,10 +1,10 @@
 def reporte_Tokens(base):
-    nombre = 'Reporte_Completo'
+    nombre = 'Reporte_Tokens_Aceptados'
     with open(nombre + '.html', 'w') as html:
         html.write('<html>')
         html.write('    <head>')
-        html.write('        <title>Reporte Tokens</title>')
-        html.write('        <link rel="stylesheet" type="text/css" href="estilo.css">')
+        html.write('        <title>Reporte Tokens Aceptados</title>')
+        html.write('        <link rel="stylesheet" type="text/css" href="estilo_TK.css">')
         html.write('    </head>')
         html.write('    <body >')
         html.write('        <h1><span class="blue"></span>Reporte<span class="blue"></span> <span class="yellow"> Tokens</pan></h1>')
@@ -23,8 +23,8 @@ def reporte_Tokens(base):
         # -----------------------------------------------------------------------------------------
         i=0
         if (base != []):
-            i+=1
             for al in base:
+                i += 1
                 html.write('                <tr>')
                 html.write('                    <td>' + str(i) + '</td>')
                 html.write('                    <td>' + str(al['valor']) + '</td>')
