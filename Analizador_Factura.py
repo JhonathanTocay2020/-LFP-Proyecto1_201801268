@@ -1,11 +1,15 @@
-
+import Generar_Token_Factura
+import os
 #--------------Variables Globales------------------
 auxNum=''
 auxI=''
 tokens=[]
+tokens_error=[]
 auxProducto =[]
 #--------------------------------------------------
 def factura(cadena,Datos_Facturas):
+    fila = 1
+    columna = 0
     cadena = cadena+"\n"
     estado = 0
     num = ""
@@ -15,15 +19,26 @@ def factura(cadena,Datos_Facturas):
     while i < len(cadena):
         if estado == 0:
             if cadena[i] == "'":
-                #print("'")
+                columna+=1
                 estado = 3
+            elif cadena[i] == ',':
+                columna +=1
             elif (ord(cadena[i]) >= 65 and ord(cadena[i]) <= 90) or (ord(cadena[i]) >= 97 and ord(cadena[i]) <= 122):
                 auxReservada = auxReservada + cadena[i]
                 estado = 1
             elif ord(cadena[i]) >= 48 and ord(cadena[i]) <= 57:
                 num = num + cadena[i]
                 estado = 2
+            #--------------------------------------------------------
+            elif ord(cadena[i]) == 32 or cadena[i]=='':
+                columna += 1
+            elif cadena[i] == '\t':
+                columna += 1
+            elif cadena[i]=="\n":
+                fila +=1
+            #----------------------------------------------------------------
             else:
+                tokens_error.append({"fila": fila, "columna": columna, "valor": cadena[i],"descripcion": "[Error Lexico] Caracter Desconocido"})
                 estado = 0
     # --------------------------------------- Identificador ---------------------------------------------------------------
         elif (estado == 1):
@@ -33,7 +48,8 @@ def factura(cadena,Datos_Facturas):
 
             else:
                 #print(auxReservada)
-                tokens.append({"token": "tk_id", "valor": auxReservada})
+                columna += 1
+                tokens.append({"token": "tk_id", "valor": auxReservada,"fila":fila,"columna": columna})
                 auxReservada = ""
                 estado = 0
                 i = i-1
@@ -44,24 +60,27 @@ def factura(cadena,Datos_Facturas):
                 estado = 2
             elif ord(cadena[i])==37:
                 num = num + cadena[i]
-                tokens.append({"token": "tk_porcentaje", "valor": num})
+                columna += 1
+                tokens.append({"token": "tk_porcentaje", "valor": num,"fila":fila,"columna": columna})
                 num = ""
                 estado = 0
             else:
-                tokens.append({"token": "tk_numero", "valor": num})
+                columna += 1
+                tokens.append({"token": "tk_numero", "valor": num,"fila":fila,"columna": columna})
                 num = ""
                 estado = 0
                 i = i - 1
     # -------------------------------------------- Cadena ----------------------------------------------
         elif estado == 3:
             if cadena[i] == "'":
-                tokens.append({"token": "tk_cadena", "valor": cad2})
+                columna +=1
+                tokens.append({"token": "tk_cadena", "valor": cad2,"fila":fila,"columna": columna})
                 cad2 = ""
                 estado = 0
             else:
                 cad2 = cad2 + cadena[i]
         i += 1
-    # ------------------------------------- imprimir -----------------------------------------
+    # ------------------------------------- Obtener Datos -----------------------------------------
     #print("------------------------ Tokens --------------------------")
 
     for h in tokens:
@@ -78,6 +97,13 @@ def factura(cadena,Datos_Facturas):
             auxI = ""
 
     Datos_Facturas.append(auxProducto)
+    Generar_Token_Factura.reporte_Tokens(tokens)
+    os.system('Reporte_Factura_Tokens.html')
+
+    if tokens_error !=[]:
+        Generar_Token_Factura.reporte_Tokens_error(tokens_error)
+        os.system('Reporte_Factura_Tokens_Error.html')
+
     #for p in Datos_Facturas:
     #    print(p)
     print("-------------------------------------------------------------------")

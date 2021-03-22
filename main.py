@@ -13,6 +13,7 @@ import Generar_Grafica
 lexema = []
 lexema_error = []
 lexema_scan =[]
+Lexemas_aceptados =[]
 # ------------- Facturas
 Datos_Facturas = []
 contador_Facturas = 0
@@ -34,10 +35,11 @@ def seleccion(entrada):
     if en == "1":
         print(" -------------------- Cargar Menu -------------------- ")
         openFile()
-        sintactico.analizador_sintactico(lexema_scan, Base)
+
     elif en == "2":
         print(" -------------------- Cargar Orden -------------------- ")
         openFile_Factura()
+
     elif en == "3":
         print(" -------------------- Generar Menú --------------------")
         if Base !=[]:
@@ -59,6 +61,7 @@ def seleccion(entrada):
         else:
             print("Ingrese un Archivo Valido en Cargar Menu para Generar Menu")
             print("----------------------------------------------------------")
+
     elif en == "4":
         print(" -------------------- Generar Factura -------------------- ")
         if Datos_Facturas != []:
@@ -67,6 +70,7 @@ def seleccion(entrada):
         else:
             print("Ingrese un archivo Valido en Cargar Orden para poder Generar la Factura")
             print("----------------------------------------------------------")
+
     elif en == "5":
         print(" -------------------- Generar Árbol --------------------")
         if Base != []:
@@ -74,6 +78,7 @@ def seleccion(entrada):
         else:
             print("Ingrese un Archivo Valido en Cargar Menu para Generar el Arbol")
             print("--------------------------------------------------------------------")
+
     elif en == "6":
         print(" -------------------- Salir --------------------")
         Presentacion()
@@ -97,7 +102,13 @@ def opciones():
 
 def openFile():
     filepath = filedialog.askopenfilename(filetypes=(("Archivos de Texto","*.lfp"),("Todos Los Archivos","*.*")))
-    archi(filepath)
+
+    if filepath == '':
+        print("no se ha seleccionado un archivo")
+        print("---------------------------------------------------")
+    else:
+        archi(filepath)
+
 
 def archi(filepath):
     archivo = open(filepath)
@@ -109,7 +120,11 @@ def archi(filepath):
 
     if (extension[-1].lower() == "lfp"):
         try:
+            # ------------------ Analizador Lexico Menu
             Analizador.analizador(file, lexema, lexema_error, lexema_scan)
+            # ------------------ Analizador Sintactico Menu
+            sintactico.analizador_sintactico(lexema_scan, Base, lexema_error, Lexemas_aceptados)
+            #Impresion()
         except:
             print("Opss!",sys.exc_info()[0],"ocured.")
     else:
@@ -118,7 +133,12 @@ def archi(filepath):
 # -------------------------------------------------------------------------------
 def openFile_Factura():
     filepath = filedialog.askopenfilename(filetypes=(("Archivos de Texto", "*.lfp"),("Todos Los Archivos","*.*")))
-    archivo_Factura(filepath)
+
+    if filepath == '':
+        print("no se ha seleccionado un archivo")
+        print("---------------------------------------------------")
+    else:
+        archivo_Factura(filepath)
 
 def archivo_Factura(filepath):
     archivo = open(filepath)
@@ -139,6 +159,16 @@ def archivo_Factura(filepath):
             print("Opss!",sys.exc_info()[0],"ocured.")
     else:
         print("La extension del Archivo no es LFP")
+
+def Impresion():
+    #print('---------------------------- -----------------------------------------')
+    print("{:^75}".format("Tabla de Lexemas Si"))
+    i=0
+    print("{:<5} {:^30} {:^10} {:^10} {:^20}".format("No.","Lexema","Fila","Columna","Token"))
+    for w in Lexemas_aceptados:
+        i = i+1
+        #print("No = " + str(i) + ", Lexema = "+ str(w['valor'])+', Fila = '+ str(w['fila'])+', Columna = '+str(w['columna'])+',Token = '+ str(w['token']))
+        print("{:<10} {:<30} {:<10} {:<10} {:<20}".format(str(i),str(w['valor']),str(w['fila']),str(w['columna']),str(w['token'])))
 
 main()
 

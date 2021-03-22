@@ -4,6 +4,7 @@ import os
 def analizador(cadena, lexema, lexema_error,lexema_scan):
     lexema.clear()
     lexema_error.clear()
+    lexema_scan.clear()
     estado = 0
     num = ""
     fila = 1
@@ -53,7 +54,7 @@ def analizador(cadena, lexema, lexema_error,lexema_scan):
                 fila = fila + 1
             else:
                 columna += 1
-                lexema_error.append({"fila": fila, "columna": columna, "token": "tk_desconocido", "valor": cadena[i]})
+                lexema_error.append({"fila": fila, "columna": columna, "valor": cadena[i], "descripcion": "[Error Lexico] Caracter Desconocido"})
                 lexema_scan.append({"fila": fila, "columna": columna, "token": "tk_desconocido", "valor": cadena[i]})
     # --------------------------------------- Identificador ---------------------------------------------------------------
         elif (estado == 1):
@@ -117,8 +118,12 @@ def analizador(cadena, lexema, lexema_error,lexema_scan):
 
         i += 1
 
-    Generar_Token_Menu.reporte_Tokens(lexema)
+    Generar_Token_Menu.reporte_Tokens(lexema_scan)
     os.system('Reporte_Tokens_Aceptados.html')
+
+    #if lexema_error !=[]:
+    #    Generar_Token_Menu.reporte_Tokens(lexema)
+    #    os.system('Reporte_Tokens_Rechazados.html')
     # ----------------------------------------------------------------------------------------
     # ----------------------------------------------------------------------------------------
     # ------------------------------------- imprimir -----------------------------------------

@@ -14,6 +14,7 @@ def reporte(Base,Datos_Facturas):
     auxPropina1 = auxPropina.replace('%','')
     Propina = float(auxPropina1)
     Propina_Decimal = Propina/100
+
     #print(auxPropina)
     #SubTotal = 0
     #auxPropina2 = int(auxPropina1)/100
@@ -93,33 +94,41 @@ def reporte(Base,Datos_Facturas):
         #auxTotal = SubTotal + auxPop
         #print('Total: Q. ' + str(auxTotal))
         #------------------------------------------------------------
-        for x in Productos:
-            for z in Lista_Seccion:
-                if z['id'] == x['ID']:
-                    cantidad = float(x['numero'])
-                    precio = float(z['numero'])
-                    total = cantidad * precio
-                    html.write('                    <tr>')
-                    html.write('                        <td>' + str(x['numero']) + '</td>')
-                    html.write('                        <td>' + str(z['nombre']) + '</td>')
-                    html.write('                        <td>Q. ' + str("{:.2f}".format(precio)) + '</td>')
-                    html.write('                        <td>Q. ' + str("{:.2f}".format(total)) + '</td>')
-                    html.write('                    </tr>')
-                    SubTotal += total
-        html.write('                    <tr>')
-        html.write('                        <td colspan="3">Sub Total</td>')
-        html.write('                        <td>Q. '+ str("{:.2f}".format(SubTotal))+'</td>')
-        html.write('                    </tr>')
-        auxPop = SubTotal * Propina_Decimal
-        html.write('                        <td colspan="3">Propina ('+str(auxPropina)+')</td>')
-        html.write('                        <td>Q. '+str("{:.2f}".format(auxPop))+'</td>')
-        html.write('                    </tr>')
-        auxTotal = SubTotal + auxPop
-        html.write('                    <tr>')
-        html.write('                        <td colspan="3">Total</td>')
-        html.write('                        <td>Q. '+ str("{:.2f}".format(auxTotal)) +'</td>')
-        html.write('                    </tr>')
-        # -------------------------------------------------------------------------------------
+        if Propina_Decimal >= 0 and Propina_Decimal <= 1:
+            #print('propina aceptada')
+            for x in Productos:
+                for z in Lista_Seccion:
+                    if z['id'] == x['ID']:
+                        cantidad = float(x['numero'])
+                        precio = float(z['numero'])
+                        total = cantidad * precio
+                        html.write('                    <tr>')
+                        html.write('                        <td>' + str(x['numero']) + '</td>')
+                        html.write('                        <td>' + str(z['nombre']) + '</td>')
+                        html.write('                        <td>Q. ' + str("{:.2f}".format(precio)) + '</td>')
+                        html.write('                        <td>Q. ' + str("{:.2f}".format(total)) + '</td>')
+                        html.write('                    </tr>')
+                        SubTotal += total
+
+            html.write('                    <tr>')
+            html.write('                        <td colspan="3">Sub Total</td>')
+            html.write('                        <td>Q. ' + str("{:.2f}".format(SubTotal)) + '</td>')
+            html.write('                    </tr>')
+            auxPop = SubTotal * Propina_Decimal
+            html.write('                        <td colspan="3">Propina (' + str(auxPropina) + ')</td>')
+            html.write('                        <td>Q. ' + str("{:.2f}".format(auxPop)) + '</td>')
+            html.write('                    </tr>')
+            auxTotal = SubTotal + auxPop
+            html.write('                    <tr>')
+            html.write('                        <td colspan="3">Total</td>')
+            html.write('                        <td>Q. ' + str("{:.2f}".format(auxTotal)) + '</td>')
+            html.write('                    </tr>')
+            # -------------------------------------------------------------------------------------
+        else:
+            html.write('                <tr>')
+            html.write('                    <td colspan="4">"La propina no se encuentra en el Rango de 0% a 100%"</td>')
+            html.write('                </tr>')
+            #print('La propina no se encuentra en el Rango de 0% a 100%')
         html.write('                </tbody>')
         html.write('            </table>')
         html.write('        </div>')
