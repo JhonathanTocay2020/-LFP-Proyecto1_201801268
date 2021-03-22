@@ -94,8 +94,8 @@ def reporte_Filtro(Base,p_limite):
                 if (z['seccion']==x):
                     Numero = float(z['numero'])
                     if Numero <= limite:
-                        print(Numero)
-                        print(limite)
+                        #print(Numero)
+                        #print(limite)
                         html.write('                    <p>'+z['nombre']+' Q ' + str(Numero) + ' <br>' +z['descripcion']+ '</p><br>')
             html.write('                </div>')
         # --------------------------------------------------------------------------------------------------
